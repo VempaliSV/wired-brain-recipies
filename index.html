@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Invitation</title>
+  <style>
+    :root {
+      --bg: #faf6f2;
+      --paper: #fffdfb;
+      --ink: #30252a;
+      --muted: #7b6f76;
+      --rose: #ad5f7a;
+      --rose-soft: #f8e9ef;
+      --gold: #ba9252;
+      --line: #eadfe4;
+      --ok: #2f8e5e;
+      --shadow: 0 24px 44px rgba(120, 77, 95, 0.12);
+      --display-photo: url("uploaded-photo.jpg");
+      --fallback-photo: url("https://images.unsplash.com/photo-1629452732098-7bcbf302cab5?auto=format&fit=crop&w=1500&q=80");
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background-color: #181a22;
+      background-image:
+        linear-gradient(rgba(22, 20, 28, 0.58), rgba(22, 20, 28, 0.58)),
+        var(--display-photo),
+        var(--fallback-photo);
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+      padding: 2.2rem 0 3rem;
+    }
+
+    .backdrop {
+      background: rgba(250, 246, 242, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 30px;
+      box-shadow: 0 18px 45px rgba(24, 19, 31, 0.28);
+      padding: 1rem;
+      backdrop-filter: blur(3px);
+    }
+
+    .hero {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background:
+        linear-gradient(rgba(37, 34, 50, 0.38), rgba(37, 34, 50, 0.38)),
+        var(--display-photo) center 30% / cover,
+        var(--fallback-photo) center 30% / cover;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      padding: clamp(1.4rem, 4vw, 2.8rem);
+    }
+
+    .hero:before,
+    .hero:after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero:before {
+      width: 220px;
+      height: 220px;
+      top: -120px;
+      right: -60px;
+      background: rgba(173, 95, 122, 0.14);
+    }
+
+    .hero:after {
+      width: 180px;
+      height: 180px;
+      bottom: -100px;
+      left: -60px;
+      background: rgba(186, 146, 82, 0.14);
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .tag {
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(25, 25, 35, 0.38);
+      border-radius: 999px;
+      padding: 0.35rem 0.8rem;
+      margin-bottom: 0.9rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3.3rem);
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .names {
+      margin: 0.55rem 0 0;
+      font-size: clamp(1.15rem, 3vw, 1.75rem);
+      color: #ffe4ef;
+      font-family: "Playfair Display", Georgia, serif;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0.85rem auto 1.1rem;
+      color: #f4edf2;
+    }
+
+    .countdown {
+      margin: 0.2rem auto 0;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(80px, 1fr));
+      gap: 0.65rem;
+      max-width: 540px;
+    }
+
+    .count {
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: rgba(14, 14, 20, 0.38);
+      border-radius: 12px;
+      padding: 0.55rem 0.4rem;
+    }
+
+    .count b {
+      display: block;
+      color: #fff;
+      font-size: 1.25rem;
+      line-height: 1.1;
+    }
+
+    .count small {
+      color: #f0dce6;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .section {
+      margin-top: 1.5rem;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--paper);
+      padding: 1.15rem;
+      box-shadow: 0 12px 25px rgba(109, 78, 96, 0.08);
+    }
+
+    .title {
+      margin: 0 0 0.9rem;
+      color: #742f4e;
+      font-size: 1.18rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .cards {
+      display: grid;
+      gap: 0.9rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .card {
+      border: 1px solid #f0e2e9;
+      border-radius: 14px;
+      background: linear-gradient(150deg, #ffffff, #fff8fb);
+      padding: 0.9rem;
+    }
+
+    .card h3 {
+      margin: 0;
+      color: #8b3758;
+      font-size: 1.02rem;
+    }
+
+    .meta {
+      margin: 0.38rem 0 0;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .meta strong { color: #4f3a45; }
+
+    .map-link {
+      display: inline-block;
+      margin-top: 0.65rem;
+      color: #8b3758;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px dashed #c89caf;
+    }
+
+    .timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.8rem; }
+
+    .timeline li {
+      border: 1px solid #f1e1d3;
+      border-radius: 14px;
+      background: #fff;
+      padding: 0.9rem;
+    }
+
+    .timeline .event { margin: 0; color: #8b3758; font-weight: 700; }
+
+    .gallery {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    }
+
+    .tile {
+      border: 1px solid #efdfeb;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .tile .img {
+      height: 130px;
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      background: linear-gradient(145deg, #ffe8f0, #fff1da);
+    }
+
+    .tile p {
+      margin: 0;
+      text-align: center;
+      color: #6a5c65;
+      font-size: 0.88rem;
+      padding: 0.5rem;
+    }
+
+
+    .display-photo {
+      margin-top: 0.9rem;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #efdfeb;
+      box-shadow: 0 8px 20px rgba(36, 29, 41, 0.15);
+      background: #fff;
+    }
+
+    .display-photo img {
+      width: 100%;
+      max-height: 560px;
+      object-fit: cover;
+      object-position: center 30%;
+      display: block;
+    }
+
+    .display-photo p {
+      margin: 0;
+      padding: 0.55rem 0.7rem;
+      text-align: center;
+      color: #6a5c65;
+      font-size: 0.88rem;
+      background: #fff9fc;
+    }
+    .rsvp {
+      display: grid;
+      gap: 0.65rem;
+      max-width: 580px;
+    }
+
+    .rsvp input,
+    .rsvp select,
+    .rsvp textarea,
+    .rsvp button {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #ead6e2;
+      padding: 0.68rem 0.72rem;
+      font: inherit;
+    }
+
+    .rsvp button {
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      background: linear-gradient(130deg, #7e2f50, #b86584);
+      cursor: pointer;
+    }
+
+    .status { display: none; margin-top: 0.5rem; color: var(--ok); font-size: 0.9rem; }
+
+    .footer {
+      margin-top: 1.4rem;
+      text-align: center;
+      color: #7f6d75;
+      background: var(--rose-soft);
+      border: 1px solid #e9d6df;
+      border-radius: 12px;
+      padding: 0.85rem;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 640px) {
+      .countdown { grid-template-columns: repeat(2, minmax(90px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrapper">
+    <div class="backdrop">
+    <header class="hero">
+      <div class="hero-content">
+        <span class="tag">Wedding Invitation</span>
+        <h1>Celebrate With Us</h1>
+        <p class="names">Vidya &amp; barinder</p>
+        <p>With joyful hearts, we invite you to celebrate our wedding festivities and blessings with us.</p>
+
+        <div class="countdown" aria-label="Countdown to wedding ceremony">
+          <div class="count"><b id="days">0</b><small>Days</small></div>
+          <div class="count"><b id="hours">0</b><small>Hours</small></div>
+          <div class="count"><b id="minutes">0</b><small>Minutes</small></div>
+          <div class="count"><b id="seconds">0</b><small>Seconds</small></div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2 class="title">🤵 Groom's Functions</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Saturday, 21st February, 2026 — Haldi</h3>
+          <p class="meta"><strong>Time:</strong> 4:00 PM onwards</p>
+          <p class="meta"><strong>Venue:</strong> At our residence, Moga</p>
+          <a class="map-link" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Moga%2C+Punjab">Open in Google Maps</a>
+        </article>
+
+        <article class="card">
+          <h3>Sunday, 22nd February, 2026 — Jaggo</h3>
+          <p class="meta"><strong>Time:</strong> 7:00 PM onwards</p>
+          <p class="meta"><strong>Venue:</strong> The Grand Farms, Moga</p>
+          <a class="map-link" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=The+Grand+Farms%2C+Moga">Open in Google Maps</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="title">👰 Bride's Function</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Mehendi</h3>
+          <p class="meta"><strong>Time:</strong> 7:00 PM onwards</p>
+          <p class="meta"><strong>Venue:</strong> Prince Apartments Lawns, I.P. Ext., Delhi</p>
+          <a class="map-link" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Prince+Apartments+Lawns%2C+IP+Extension%2C+Delhi">Open in Google Maps</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="title">💍 Combined Bride &amp; Groom Functions</h2>
+      <ul class="timeline">
+        <li>
+          <p class="event">Sunday, 22nd February, 2026 — Wedding Ceremony</p>
+          <p class="meta"><strong>Venue:</strong> Kingdom Hotel, Punjab</p>
+          <p class="meta"><strong>Ceremony:</strong> 9:00 AM onwards</p>
+          <p class="meta"><strong>Sumuhurtham:</strong> 11:54 AM, followed by lunch</p>
+          <a class="map-link" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Kingdom+Hotel%2C+Punjab">Open in Google Maps</a>
+        </li>
+        <li>
+          <p class="event">Monday, 23rd February, 2026 — Anand Karaj</p>
+          <p class="meta"><strong>Time:</strong> 10:00 AM onwards</p>
+          <p class="meta"><strong>Venue:</strong> The Landlord Farms, Moga, Punjab</p>
+          <a class="map-link" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=The+Landlord+Farms%2C+Moga%2C+Punjab">Open in Google Maps</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2 class="title">🖼️ Photo Display</h2>
+      <div class="display-photo">
+        <img src="uploaded-photo.jpg" alt="Vidya and barinder" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1629452732098-7bcbf302cab5?auto=format&fit=crop&w=1500&q=80';" />
+        <p>Featured couple photo</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="title">📩 RSVP</h2>
+      <form id="rsvpForm" class="rsvp">
+        <input id="guestName" type="text" placeholder="Your full name" required />
+        <input id="guestCount" type="number" min="1" max="10" placeholder="Number of guests" required />
+        <select id="attendance" required>
+          <option value="">Will you attend?</option>
+          <option value="Yes, happily attending">Yes, happily attending</option>
+          <option value="Sorry, unable to attend">Sorry, unable to attend</option>
+        </select>
+        <textarea id="message" rows="3" placeholder="Message for the couple (optional)"></textarea>
+        <button type="submit">Submit RSVP</button>
+      </form>
+      <p id="rsvpStatus" class="status"></p>
+    </section>
+
+    <p class="footer">Thank you for being part of our special celebration. ✨</p>
+    </div>
+  </main>
+
+  <script>
+    const weddingDate = new Date('2026-02-22T09:00:00+05:30').getTime();
+
+    function updateCountdown() {
+      const now = Date.now();
+      const diff = weddingDate - now;
+      const daysEl = document.getElementById('days');
+      const hoursEl = document.getElementById('hours');
+      const minutesEl = document.getElementById('minutes');
+      const secondsEl = document.getElementById('seconds');
+
+      if (diff <= 0) {
+        daysEl.textContent = '0';
+        hoursEl.textContent = '00';
+        minutesEl.textContent = '00';
+        secondsEl.textContent = '00';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      daysEl.textContent = String(days);
+      hoursEl.textContent = String(hours).padStart(2, '0');
+      minutesEl.textContent = String(minutes).padStart(2, '0');
+      secondsEl.textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    const form = document.getElementById('rsvpForm');
+    const status = document.getElementById('rsvpStatus');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const entry = {
+        name: document.getElementById('guestName').value.trim(),
+        guests: document.getElementById('guestCount').value,
+        attendance: document.getElementById('attendance').value,
+        message: document.getElementById('message').value.trim(),
+        submittedAt: new Date().toISOString()
+      };
+
+      const rsvps = JSON.parse(localStorage.getItem('weddingRsvps') || '[]');
+      rsvps.push(entry);
+      localStorage.setItem('weddingRsvps', JSON.stringify(rsvps));
+
+      status.style.display = 'block';
+      status.textContent = `Thank you, ${entry.name}! Your RSVP has been saved.`;
+      form.reset();
+    });
+  </script>
+</body>
+</html>
